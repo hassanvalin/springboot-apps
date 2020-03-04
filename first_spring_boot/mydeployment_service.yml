@@ -32,7 +32,7 @@ spec:
         selector:
                 app: myk8s_app1                     # It tells any POD with this name
         ports:
-                - name: http
+                - name: http                        # For some services, you need to expose more than one port. When using multiple ports for a service, you must give all of your ports names so that these are unambiguous.
                   port: 80   #Exposing to the user
                   targetPort: 8080  #From the container
         type: LoadBalancer          
