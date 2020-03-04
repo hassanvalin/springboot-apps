@@ -30,9 +30,11 @@ metadata:
                 app: myk8s_svc
 spec:
         selector:
-                app: myk8s_app1
+                app: myk8s_app1                     # It tells any POD with this name
         ports:
                 - name: http
                   port: 80   #Exposing to the user
                   targetPort: 8080  #From the container
         type: LoadBalancer          
+
+# A Service can map any incoming port to a targetPort
