@@ -14,6 +14,7 @@ pipeline {
     stage('Build') {
       steps {
         script {
+          sh 'cd first_spring_boot'
           sh 'mvn clean install'
         }  
       }  
