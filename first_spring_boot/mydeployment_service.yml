@@ -2,7 +2,7 @@ apiVersion: apps/v1             # Which version of the Kubernetes API you’re u
 kind: Deployment                # What kind of object you want to create
 metadata:                       # Data that helps uniquely identify the object, including a name string, UID, and optional namespace
         name: myk8sdeployment
-        namespace: ks-ns
+        namespace: ks-ns        # Created this namespace manually in cluster before using in yml file
         labels:
                 app: myk8s_app
 spec:                           # What state you desire for the object
