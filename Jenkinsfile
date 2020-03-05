@@ -15,6 +15,7 @@ pipeline {
       steps {
         script {
           sh 'cd first_spring_boot'
+          sh 'echo pwd'
           sh 'mvn clean install'
         }  
       }  
