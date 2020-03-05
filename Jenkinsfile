@@ -11,6 +11,13 @@ pipeline {
         userRemoteConfigs: [[url: 'https://github.com/hassanvalin/springboot-apps.git']]]
         )   }
     }
+    stage('Build') {
+      steps {
+        script {
+          sh 'mvn clean install'
+        }  
+      }  
+    }  
   }
 }  
   
