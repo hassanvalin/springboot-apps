@@ -33,7 +33,7 @@ pipeline {
       steps {
         script {
           rtMaven.deployer releaseRepo: 'libs-release-local', snapshotRepo: 'libs-snapshot-local', server: server
-          rtMaven.resolver releaseRepo: 'libs-release' snapshotRepo: 'libs-snapshot', server: server
+          // rtMaven.resolver releaseRepo: 'libs-release' snapshotRepo: 'libs-snapshot', server: server
           // rtMaven.deployer.artifactDeploymentPatterns.addExclude("pom.xml")
           buildInfo = Artifactory.newBuildInfo()
           buildInfo.retention maxBuilds: 10, maxDays: 7, deleteBuildArtifacts: true
