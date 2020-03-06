@@ -40,6 +40,13 @@ pipeline {
           buildInfo.env.capture = true
         }  
       }  
+    }
+    stage('Publish build info') {
+      steps {
+        script {
+          server.publishBuildInfo buildInfo
+        }  
+      }  
     }  
   }
 }  
