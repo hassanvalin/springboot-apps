@@ -79,16 +79,6 @@ pipeline {
         sh "docker rmi $registry:$BUILD_NUMBER"
       }
     }
-    stage('Deploy to Kubernetes') {
-        steps {
-            script {
-                 sh 'kubectl get ns'
-                //sh 'kubectl apply -f first_spring_boot/mydeployment_service.yml --kubeconfig=$kubeconfig --context=MyK8SCluster'
-                //sh 'kubectl get pods --kubeconfig=$kubeconfig --context=minikube -n ci'
-                //sh 'kubectl rollout status deployment python-flask --kubeconfig=$kubeconfig --context=minikube -n ci'
-            }
-        }
-    }
   }
 }  
   
