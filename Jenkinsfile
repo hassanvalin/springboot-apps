@@ -1,11 +1,19 @@
-def server = Artifactory.server 'Artifactory1'
+// def server = Artifactory.server 'Artifactory1'
 
-def rtMaven = Artifactory.newMavenBuild()
+// def rtMaven = Artifactory.newMavenBuild()
 
-def buildInfo
+// def buildInfo
 
 
 pipeline {
+  
+  environment {
+    registry = "hassandocker1/my_java_image"
+    registryCredential = 'dockerhub'
+    kubeconfig = credentials('azure-kubeconfig')
+    dockerImage = ''
+  }
+  
   agent any
   
   stages {
@@ -18,7 +26,7 @@ pipeline {
         userRemoteConfigs: [[url: 'https://github.com/hassanvalin/springboot-apps.git']]]
         )   }
     }
-    stage('Build') {
+    stage('Build Project') {
       steps {
         script {
           sh '''
@@ -28,7 +36,8 @@ pipeline {
             '''
         }  
       }
-    }  
+    }
+    /**
     stage('Artifactory Configuration') {
       steps {
         script {
@@ -47,7 +56,19 @@ pipeline {
           server.publishBuildInfo buildInfo
         }  
       }  
-    }  
+    } */
+    
+    stage('Building image') {
+      steps{
+        script {
+            sh '''
+              cd first_spring_boot
+              docker build -t ' + registry + ":$BUILD_NUMBER .
+              '''
+          //dockerImage = docker.build(registry + ":$BUILD_NUMBER", "python_exmple/")
+        }
+      }
+    }
   }
 }  
   
