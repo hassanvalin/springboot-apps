@@ -40,9 +40,10 @@ pipeline {
     stage('Upload Artifact') {
       steps {
         withCredentials([
-                        usernamePassword(credentialsId: 'Artifactory', usernameVariable: 'ARTIFACTORY_USERNAME', passwordVariable: 'ARTIFACTORY_PASSWORD')
+                        //usernamePassword(credentialsId: 'Artifactory', usernameVariable: 'ARTIFACTORY_USERNAME', passwordVariable: 'ARTIFACTORY_PASSWORD')
+            usernameColonPassword(credentialsId: 'Artifactory', variable: 'credentials')
                         ])
-        sh 'curl -u $ARTIFACTORY_USERNAME:$ARTIFACTORY_PASSWORD -X PUT "http://nisumdevops3c.mylabserver.com:8081/artifactory/libs-release-local/first-spring.jar" -T target/first-spring.jar'
+        sh 'curl -u${credentials} -X PUT "http://nisumdevops3c.mylabserver.com:8081/artifactory/libs-release-local/first-spring.jar" -T target/first-spring.jar'
         
         /**script {
           sh 'curl -u $ARTIFACTORY_USERNAME:$ARTIFACTORY_PASSWORD -X PUT "http://nisumdevops3c.mylabserver.com:8081/artifactory/libs-release-local/first-spring.jar" -T target/first-spring.jar'
