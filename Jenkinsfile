@@ -98,7 +98,7 @@ pipeline {
             script {
                 sh 'kubectl apply -f first_spring_boot/mydeployment_service.yml --kubeconfig=$kubeconfig --context=minikube'
                 sh 'kubectl get pods --kubeconfig=$kubeconfig --context=minikube -n ks-ns'
-                sh 'kubectl rollout status deployment myk8sdeployment --kubeconfig=$kubeconfig --context=minikube -n ci'
+                sh 'kubectl rollout status deployment myk8sdeployment --kubeconfig=$kubeconfig --context=minikube -n ks-ns'
             }
         }
     }
