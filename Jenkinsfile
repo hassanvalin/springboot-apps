@@ -40,7 +40,7 @@ pipeline {
     stage('Upload Artifact') {
       steps {
         withCredentials([
-                        usernamePassword(credentialsId: 'Artifactory1', usernameVariable: 'ARTIFACTORY_USERNAME', passwordVariable: 'ARTIFACTORY_PASSWORD'),
+                        usernamePassword(credentialsId: 'Artifactory', usernameVariable: 'ARTIFACTORY_USERNAME', passwordVariable: 'ARTIFACTORY_PASSWORD')
                         ])
         
         script {
