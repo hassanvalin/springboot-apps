@@ -61,6 +61,7 @@ pipeline {
     stage('Building image') {
       steps{
         script {
+            sh 'cd first_spring_boot'
             dockerImage = docker.build(registry + ":$BUILD_NUMBER", ".")
         }
       }
