@@ -10,7 +10,7 @@ pipeline {
   environment {
     registry = "hassandocker1/my_java_image"
     registryCredential = 'dockerhub'
-    kubeconfig = credentials('azure_kubeconfig')
+    kubeconfig = credentials('minikube-kubeconfig')
     dockerImage = ''
   }
   
@@ -37,7 +37,7 @@ pipeline {
         }  
       }
     }
-    stage('Upload Artifact') {
+    /**stage('Upload Artifact') {
       steps {
         withCredentials([
                         //usernamePassword(credentialsId: 'Artifactory', usernameVariable: 'ARTIFACTORY_USERNAME', passwordVariable: 'ARTIFACTORY_PASSWORD')
@@ -45,11 +45,11 @@ pipeline {
                         ])
         sh 'curl -u${credentials} -X PUT "http://nisumdevops3c.mylabserver.com:8081/artifactory/libs-release-local/first-spring.jar" -T target/first-spring.jar'
         
-        /**script {
+        script {
           sh 'curl -u $ARTIFACTORY_USERNAME:$ARTIFACTORY_PASSWORD -X PUT "http://nisumdevops3c.mylabserver.com:8081/artifactory/libs-release-local/first-spring.jar" -T target/first-spring.jar'
-        }*/  
+        }
       }  
-    }  
+    } */
     /**
     stage('Artifactory Configuration') {
       steps {
@@ -70,7 +70,7 @@ pipeline {
         }  
       }  
     } */
-    /**
+ 
     stage('Building image') {
       steps{
         script {
@@ -91,7 +91,17 @@ pipeline {
       steps{
         sh "docker rmi $registry:$BUILD_NUMBER"
       }
-    } */
+    }
+    
+    stage('Deploy to Kubernetes Minikube') {
+        steps {
+            script {
+                sh 'kubectl apply -f first_spring_boot/mydeployment_service.yml --kubeconfig=$kubeconfig --context=minikube'
+                sh 'kubectl get pods --kubeconfig=$kubeconfig --context=minikube -n ks-ns'
+                //sh 'kubectl rollout status deployment python-flask --kubeconfig=$kubeconfig --context=minikube -n ci'
+            }
+        }
+    }
   }
 }  
   
