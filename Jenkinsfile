@@ -1,3 +1,10 @@
+def server = Artifactory.server 'Artifactory1'
+
+def rtMaven = Artifactory.newMavenBuild()
+
+def buildInfo
+
+
 pipeline {
   agent any
   
