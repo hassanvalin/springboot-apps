@@ -10,7 +10,7 @@ pipeline {
   environment {
     registry = "hassandocker1/my_java_image"
     registryCredential = 'dockerhub'
-    kubeconfig = credentials('azure-kubeconfig')
+    kubeconfig = credentials('azure_kubeconfig')
     dockerImage = ''
   }
   
