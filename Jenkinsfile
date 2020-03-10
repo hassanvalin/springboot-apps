@@ -96,7 +96,7 @@ pipeline {
     stage('Deploy to Kubernetes Azure') {
         steps {
             script {
-                sh 'kubectl create namespace ks-ns'
+                sh 'kubectl create namespace ks-ns --kubeconfig=$kubeconfig --context=MyK8SCluster'
                 sh 'kubectl apply -f first_spring_boot/mydeployment_service.yml --kubeconfig=$kubeconfig --context=MyK8SCluster'
                 sh 'kubectl get pods --kubeconfig=$kubeconfig --context=MyK8SCluster -n ks-ns'
                 sh 'kubectl rollout status deployment myk8sdeployment --kubeconfig=$kubeconfig --context=MyK8SCluster -n ks-ns'
