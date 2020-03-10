@@ -10,7 +10,7 @@ pipeline {
   environment {
     registry = "hassandocker1/my_java_image"
     registryCredential = 'dockerhub'
-    kubeconfig = credentials('minikube-kubeconfig')
+    kubeconfig = credentials('azure_kubeconfig')
     dockerImage = ''
   }
   
@@ -93,12 +93,12 @@ pipeline {
       }
     }
     
-    stage('Deploy to Kubernetes Minikube') {
+    stage('Deploy to Kubernetes Azure') {
         steps {
             script {
-                sh 'kubectl apply -f first_spring_boot/mydeployment_service.yml --kubeconfig=$kubeconfig --context=minikube'
-                sh 'kubectl get pods --kubeconfig=$kubeconfig --context=minikube -n ks-ns'
-                sh 'kubectl rollout status deployment myk8sdeployment --kubeconfig=$kubeconfig --context=minikube -n ks-ns'
+                sh 'kubectl apply -f first_spring_boot/mydeployment_service.yml --kubeconfig=$kubeconfig --context=MyK8SCluster'
+                sh 'kubectl get pods --kubeconfig=$kubeconfig --context=MyK8SCluster -n ks-ns'
+                sh 'kubectl rollout status deployment myk8sdeployment --kubeconfig=$kubeconfig --context=MyK8SCluster -n ks-ns'
             }
         }
     }
