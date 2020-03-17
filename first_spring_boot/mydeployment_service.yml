@@ -13,7 +13,7 @@ spec:                           # What state you desire for the object
                 spec:
                     containers:
                         - name: my-java-app
-                          image: hassandocker1/my_java_image:$BUILD_NUMBER                
+                          image: hassandocker1/my_java_image:%%BUILD_NUMBER%%                
                     #       env:
                     #             - name: "AUTH_TOKEN"                   # You can login to the pod and echo $AUTH_TOKEN and see the value of the environment variable AUTH_TOKEN
                     #               valueFrom:
