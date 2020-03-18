@@ -55,6 +55,7 @@ pipeline {
         withCredentials([
                         usernamePassword(credentialsId: 'Artifactory', usernameVariable: 'ARTIFACTORY_USERNAME', passwordVariable: 'ARTIFACTORY_PASSWORD')
             //usernameColonPassword(credentialsId: 'Artifactory', variable: 'credentials')
+                        sh 'pwd'
                         ])
         script {
           sh 'echo "Hello"'
