@@ -80,7 +80,7 @@ pipeline {
           //buildInfo.env.capture = true
           */
           
-          def server = Artifactory.newServer url: 'http://http://nisumdevops3c.mylabserver.com:8081/artifactory', credentialsId: 'Artifactory'
+          def server = Artifactory.newServer 'Artifactory1', credentialsId: 'Artifactory'
           server.bypassProxy = true
           def buildInfo = server.upload spec: uploadSpec
           
