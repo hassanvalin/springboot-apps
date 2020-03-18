@@ -79,7 +79,7 @@ pipeline {
               spec: '''{
                     "files": [
                       {
-                        "pattern": "target/*.jar",
+                        "pattern": "first_spring_boot/target/*.jar",
                         "target": "libs-release/"
                       }
                    ]
