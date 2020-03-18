@@ -1,6 +1,3 @@
-
-def server = Artifactory.server 'Artifactory1'
-
 pipeline {
   
   environment {
@@ -8,18 +5,7 @@ pipeline {
     registryCredential = 'dockerhub'
     kubeconfig = credentials('azure_kubeconfig')
     dockerImage = ''
-    
-    /**
-    def uploadSpec = """{
-           "files": [
-               {
-               "pattern": "target/*.jar",
-               "target": "libs-release/"
-               }
-           ]
-    }"""
-    */
-  }
+ 
   
   agent any
   
@@ -44,26 +30,13 @@ pipeline {
         }  
       }
     }
-    /**stage('Upload Artifact') {
-      steps {
-        withCredentials([
-                        //usernamePassword(credentialsId: 'Artifactory', usernameVariable: 'ARTIFACTORY_USERNAME', passwordVariable: 'ARTIFACTORY_PASSWORD')
-            usernameColonPassword(credentialsId: 'Artifactory', variable: 'credentials')
-                        ])
-        sh 'curl -u${credentials} -X PUT "http://nisumdevops3c.mylabserver.com:8081/artifactory/libs-release-local/first-spring.jar" -T target/first-spring.jar'
-        
-        script {
-          sh 'curl -u $ARTIFACTORY_USERNAME:$ARTIFACTORY_PASSWORD -X PUT "http://nisumdevops3c.mylabserver.com:8081/artifactory/libs-release-local/first-spring.jar" -T target/first-spring.jar'
-        }
-      }  
-    } */
 
-    stage('Artifactory Configuration') {
+    stage('Artifactory Upload') {
       steps {
-        withCredentials([
-                       usernamePassword(credentialsId: 'Artifactory', usernameVariable: 'ARTIFACTORY_USERNAME', passwordVariable: 'ARTIFACTORY_PASSWORD')
+        //withCredentials([
+             //          usernamePassword(credentialsId: 'Artifactory', usernameVariable: 'ARTIFACTORY_USERNAME', passwordVariable: 'ARTIFACTORY_PASSWORD')
             //usernameColonPassword(credentialsId: 'Artifactory', variable: 'credentials')
-                       ])
+            //           ])
         script {
           
           sh 'ls -lrt'
@@ -83,43 +56,11 @@ pipeline {
           
           rtPublishBuildInfo (
                 serverId: 'Artifactory1',
-                // The buildName and buildNumber below are optional. If you do not set them, the Jenkins job name is used
-                // as the build name. The same goes for the build number.
-                // If you choose to set custom build name and build number by adding the following buildName and
-                // buildNumber properties, you should make sure that previous build steps (for example rtDownload
-                // and rtIpload) have the same buildName and buildNumber set. If they don't, then these steps will not
-                // be included in the build-info.
           )
 
-          
-          /**
-          rtMaven.deployer releaseRepo: 'libs-release-local', snapshotRepo: 'libs-snapshot-local', server: server
-          rtMaven.resolver releaseRepo: 'libs-release', snapshotRepo: 'libs-snapshot', server: server
-          // rtMaven.deployer.artifactDeploymentPatterns.addExclude("pom.xml")
-          //buildInfo = Artifactory.newBuildInfo()
-          buildInfo.retention maxBuilds: 10, maxDays: 7, deleteBuildArtifacts: true
-          //buildInfo.env.capture = true
-          */
-
-          /**
-          def server = Artifactory.newServer url: 'http://http://nisumdevops3c.mylabserver.com:8081/artifactory', credentialsId: 'Artifactory'
-          server.bypassProxy = true
-          def buildInfo = server.upload spec: uploadSpec
-          */
-          
         }  
       }  
     }
-    /**
-    stage('Publish build info') {
-      steps {
-        script {
-          server.publishBuildInfo buildInfo
-        }  
-      }  
-    }
-    */
- 
     stage('Building image') {
       steps{
         script {
