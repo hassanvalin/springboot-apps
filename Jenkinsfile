@@ -1,8 +1,7 @@
-// def server = Artifactory.server 'Artifactory1'
-
-// def rtMaven = Artifactory.newMavenBuild()
-
-// def buildInfo
+def server = Artifactory.server 'Artifactory1'
+def buildInfo = Artifactory.newBuildInfo()
+buildInfo.env.capture = true
+def rtMaven = Artifactory.newMavenBuild()
 
 
 pipeline {
@@ -50,16 +49,16 @@ pipeline {
         }
       }  
     } */
-    /**
+
     stage('Artifactory Configuration') {
       steps {
         script {
           rtMaven.deployer releaseRepo: 'libs-release-local', snapshotRepo: 'libs-snapshot-local', server: server
-          // rtMaven.resolver releaseRepo: 'libs-release' snapshotRepo: 'libs-snapshot', server: server
+          rtMaven.resolver releaseRepo: 'libs-release' snapshotRepo: 'libs-snapshot', server: server
           // rtMaven.deployer.artifactDeploymentPatterns.addExclude("pom.xml")
-          buildInfo = Artifactory.newBuildInfo()
+          //buildInfo = Artifactory.newBuildInfo()
           buildInfo.retention maxBuilds: 10, maxDays: 7, deleteBuildArtifacts: true
-          buildInfo.env.capture = true
+          //buildInfo.env.capture = true
         }  
       }  
     }
@@ -69,7 +68,7 @@ pipeline {
           server.publishBuildInfo buildInfo
         }  
       }  
-    } */
+    }
  
     stage('Building image') {
       steps{
