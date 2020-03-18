@@ -80,7 +80,7 @@ pipeline {
                     "files": [
                       {
                         "pattern": "first_spring_boot/target/*.jar",
-                        "target": "libs-release/"
+                        "target": "libs-release/$BUILD_NUMBER/"
                       }
                    ]
               }''',
