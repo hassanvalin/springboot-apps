@@ -71,6 +71,9 @@ pipeline {
         //sh 'pwd'
         script {
           
+          sh 'ls -lrt'
+          sh 'pwd'
+          
           rtUpload (
               serverId: 'Artifactory1',
               spec: '''{
