@@ -87,9 +87,6 @@ pipeline {
         }  
       }  
     }
-    
-    
-    /**
     stage('Publish build info') {
       steps {
         script {
@@ -97,9 +94,6 @@ pipeline {
         }  
       }  
     }
-    */
-    
-    
  
     stage('Building image') {
       steps{
