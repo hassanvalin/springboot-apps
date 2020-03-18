@@ -1,8 +1,9 @@
+/**
 def server = Artifactory.server 'Artifactory1'
 def buildInfo = Artifactory.newBuildInfo()
 buildInfo.env.capture = true
 def rtMaven = Artifactory.newMavenBuild()
-
+*/
 
 pipeline {
   
@@ -11,6 +12,16 @@ pipeline {
     registryCredential = 'dockerhub'
     kubeconfig = credentials('azure_kubeconfig')
     dockerImage = ''
+    
+    def uploadSpec = """{
+           "files": [
+               {
+               "pattern": "target/*.jar",
+               "target": "libs-release/"
+               }
+           ]
+    }"""
+    
   }
   
   agent any
@@ -58,15 +69,27 @@ pipeline {
        //                 ])
         //sh 'pwd'
         script {
+          
+          
+          /**
           rtMaven.deployer releaseRepo: 'libs-release-local', snapshotRepo: 'libs-snapshot-local', server: server
           rtMaven.resolver releaseRepo: 'libs-release', snapshotRepo: 'libs-snapshot', server: server
           // rtMaven.deployer.artifactDeploymentPatterns.addExclude("pom.xml")
           //buildInfo = Artifactory.newBuildInfo()
           buildInfo.retention maxBuilds: 10, maxDays: 7, deleteBuildArtifacts: true
           //buildInfo.env.capture = true
+          */
+          
+          def server = Artifactory.newServer url: 'http://http://nisumdevops3c.mylabserver.com:8081/artifactory', credentialsId: 'Artifactory'
+          server.bypassProxy = true
+          def buildInfo = server.upload spec: uploadSpec
+          
         }  
       }  
     }
+    
+    
+    /**
     stage('Publish build info') {
       steps {
         script {
@@ -74,6 +97,9 @@ pipeline {
         }  
       }  
     }
+    */
+    
+    
  
     stage('Building image') {
       steps{
