@@ -6,6 +6,7 @@ pipeline {
     kubeconfig = credentials('azure_kubeconfig')
     dockerImage = ''
  
+  }
   
   agent any
   
