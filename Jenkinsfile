@@ -84,6 +84,8 @@ pipeline {
           server.bypassProxy = true
           def buildInfo = server.upload spec: uploadSpec
           
+          sh 'pwd'
+          
         }  
       }  
     }
