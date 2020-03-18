@@ -52,11 +52,11 @@ pipeline {
 
     stage('Artifactory Configuration') {
       steps {
-        withCredentials([
-                        usernamePassword(credentialsId: 'Artifactory', usernameVariable: 'ARTIFACTORY_USERNAME', passwordVariable: 'ARTIFACTORY_PASSWORD')
+       // withCredentials([
+       //                 usernamePassword(credentialsId: 'Artifactory', usernameVariable: 'ARTIFACTORY_USERNAME', passwordVariable: 'ARTIFACTORY_PASSWORD')
             //usernameColonPassword(credentialsId: 'Artifactory', variable: 'credentials')
                         ])
-        sh 'pwd'
+        //sh 'pwd'
         script {
           rtMaven.deployer releaseRepo: 'libs-release-local', snapshotRepo: 'libs-snapshot-local', server: server
           rtMaven.resolver releaseRepo: 'libs-release', snapshotRepo: 'libs-snapshot', server: server
