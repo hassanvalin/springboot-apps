@@ -83,6 +83,16 @@ pipeline {
               }''',
           )
           
+          rtPublishBuildInfo (
+                serverId: 'Artifactory1',
+                // The buildName and buildNumber below are optional. If you do not set them, the Jenkins job name is used
+                // as the build name. The same goes for the build number.
+                // If you choose to set custom build name and build number by adding the following buildName and
+                // buildNumber properties, you should make sure that previous build steps (for example rtDownload
+                // and rtIpload) have the same buildName and buildNumber set. If they don't, then these steps will not
+                // be included in the build-info.
+          )
+
           
           /**
           rtMaven.deployer releaseRepo: 'libs-release-local', snapshotRepo: 'libs-snapshot-local', server: server
