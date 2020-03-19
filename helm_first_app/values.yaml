@@ -1,0 +1,10 @@
+deployName: my-first-app
+namespace: helm-ns
+labelName: my-app
+appName: my-spring-app
+imageName: hassandocker1/my_java_image:76
+
+service:
+        type: LoadBalancer
+        port: 80
+        targetport: 8080

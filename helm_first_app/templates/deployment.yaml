@@ -1,0 +1,19 @@
+apiVersion: apps/v1             # Which version of the Kubernetes API you’re using to create this object
+kind: Deployment                # What kind of object you want to create
+metadata:                       # Data that helps uniquely identify the object, including a name string, UID, and optional namespace
+        name: {{ .Values.deployName }}
+        namespace: {{ .Values.namespace }}        # Created this namespace manually in cluster before using in yml file
+        labels:
+                app: {{ .Values.labelName }}
+spec:          # What state you desire for the object
+        selector:
+                matchLabels:
+                        app: {{ .Values.labelName }}
+        template:
+                metadata:
+                        labels:
+                                app: {{ .Values.labelName }}
+                spec:
+                    containers:
+                        - name: {{ .Values.appName }}
+                          image: {{ .Values.imageName }}
