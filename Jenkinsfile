@@ -31,7 +31,8 @@ pipeline {
         }  
       }
     }
-
+    
+    /**
     stage('Artifactory Upload') {
       steps {
         //withCredentials([
@@ -61,7 +62,9 @@ pipeline {
 
         }  
       }  
-    }
+    } */
+
+
     stage('Building image') {
       steps{
         script {
@@ -83,7 +86,8 @@ pipeline {
         sh "docker rmi $registry:$BUILD_NUMBER"
       }
     }
-    
+   
+    /** 
     stage('Deploy to Kubernetes Azure') {
         steps {
             script {
@@ -94,6 +98,15 @@ pipeline {
                 sh 'kubectl get svc --kubeconfig=$kubeconfig --context=MyK8SCluster -n ks-ns'
             }
         }
+    } */
+
+    stage('Deploy Using Helm') {
+	steps {
+	    script {
+		sh 'helm install my-app /helm_first_app/. --kubeconfig=$kubeconfig --kube-context=MyK8SCluster'
+                sh 'helm list --kubeconfig=$kubeconfig --kube-context=MyK8SCluster'
+            }
+        }	
     }
   }
 }  
