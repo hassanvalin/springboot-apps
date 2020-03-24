@@ -7,7 +7,7 @@ pipeline {
     dockerImage = ''
  
   }
-  
+ 
   agent any
   
   stages {
@@ -104,8 +104,8 @@ pipeline {
 	steps {
 	    script {
                 sh 'pwd'
-		sh 'helm install my-app /helm_first_app/. --kubeconfig=$kubeconfig --kube-context=MyK8SCluster'
-                sh 'helm list --kubeconfig=$kubeconfig --kube-context=MyK8SCluster'
+		sh '/usr/local/bin/helm install my-app /helm_first_app/. --kubeconfig=$kubeconfig --kube-context=MyK8SCluster'
+                sh '/usr/local/bin/helm list --kubeconfig=$kubeconfig --kube-context=MyK8SCluster'
             }
         }	
     }
