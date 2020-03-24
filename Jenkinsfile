@@ -104,7 +104,7 @@ pipeline {
 	steps {
 	    script {
                 sh 'pwd'
-		sh '/usr/local/bin/helm install my-app /helm_first_app/. --kubeconfig=$kubeconfig --kube-context=MyK8SCluster'
+		sh '/usr/local/bin/helm install my-app helm_first_app --kubeconfig=$kubeconfig --kube-context=MyK8SCluster'
                 sh '/usr/local/bin/helm list --kubeconfig=$kubeconfig --kube-context=MyK8SCluster'
             }
         }	
