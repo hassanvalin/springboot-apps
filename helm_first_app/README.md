@@ -54,6 +54,11 @@ kubectl top pods -n <Namespace>
 
 
 # If watch is installed on your VM you can use below command to see the dynamic change of CPU and memory
-watch kubectl top pods -n helm-ns
+watch kubectl top pods -n <your_Name_Space>
 
+# If you want to watch during pods recreation use below command
+watch kubectl get pods -n <your_Name_Space>
+
+# In any case if you want to edit the running deployment use below command that will recreate the Pod as well
+kubectl edit deployment <Your_deployment_Name> -n <your_Name_Space>
 
