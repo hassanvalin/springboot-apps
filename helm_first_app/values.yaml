@@ -8,3 +8,9 @@ service:
         type: LoadBalancer
         port: 80
         targetport: 8080
+resource:        
+        cpu: 0.3
+        memory: 256m
+        limits:
+                cpu: 0.3
+                memory: 512m

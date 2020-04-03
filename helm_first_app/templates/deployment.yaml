@@ -17,3 +17,11 @@ spec:          # What state you desire for the object
                     containers:
                         - name: {{ .Values.appName }}
                           image: {{ .Values.imageName }}
+                          resources:
+                                  requests:
+                                          cpu: {{ .Values.resource.cpu }}
+                                          memory: {{ .Values.resource.memory }}
+                                  limits:
+                                          cpu: {{ .Values.resource.limits.cpu }}
+                                          memory: {{ .Values.resource.limits.memory }}
+
