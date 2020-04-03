@@ -18,11 +18,11 @@ probes:
         liveness:
                 path: /app/index
                 port: 8080
-                initialDelaySeconds: 90
-                periodSeconds: 5
-        readiness:
+                initialDelaySeconds: 90  #Because of this condition it waits initial 90 seconds to check the application health
+                periodSeconds: 5  #It keeps checking the health for every 5 seconds after initial 90 seconds. If you try to edit the created deployment 'kubectl edit deployment <deployment_name> -n <your_namespace>' you can see other parameters like 'failureThreshold' means it checks those many number of times before restarting the Pod
+         readiness:
                 path: /app/index
                 port: 8080
-                initialDelaySeconds: 60
-                periodSeconds: 5
+                initialDelaySeconds: 60   #Even if the application started <60 seconds, because of this condition in readinessprobe the you cant see POD as running until 60sec 
+                periodSeconds: 5  #Readinessprobe keeps checking for every 5 seconds
                 
