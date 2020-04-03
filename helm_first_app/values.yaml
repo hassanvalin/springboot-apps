@@ -13,4 +13,4 @@ resource:
         memory: 1Gi
         limits:
                 cpu: 1
-                memory: 512mi
+                memory: 512Mi
