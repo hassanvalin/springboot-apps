@@ -46,4 +46,14 @@ helm history <Name_you_used_earlier>
 
 helm rollback <Name_You_Used_earlier> <Revision_Number_you_want_to_use>
 
+# To delete the release 
+helm delete <releasename>  //you can get the release name by running 'helm list'
+
+# To see the metrics on the pods which is under particular namespace
+kubectl top pods -n <Namespace>
+
+
+# If watch is installed on your VM you can use below command to see the dynamic change of CPU and memory
+watch kubectl top pods -n helm-ns
+
 
