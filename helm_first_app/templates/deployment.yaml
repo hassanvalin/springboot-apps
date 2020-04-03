@@ -26,14 +26,14 @@ spec:          # What state you desire for the object
                                           memory: {{ .Values.resource.limits.memory }}
                           livenessProbe:
                                   httpGet:
-                                          path: /app/index
-                                          port: 8080          #Once after the app is up it will check on this port, if it can't able to reach the app then the conatiner will be restarted automatically
-                                  initialDelaySeconds: 90
-                                  periodSeconds: 5        
+                                          path: {{ .Values.probes.liveness.path }}
+                                          port: {{ .Values.probes.liveness.port }}         #Once after the app is up it will check on this port, if it can't able to reach the app then the conatiner will be restarted automatically
+                                  initialDelaySeconds: {{ .Values.probes.liveness.initialDelaySeconds }}
+                                  periodSeconds: {{ .Values.probes.liveness.periodSeconds }}        
                           readinessProbe:
                                   httpGet:
-                                        path: /app/index
-                                        port: 8080
-                                  initialDelaySeconds: 60
-                                  periodSeconds: 5
+                                        path: {{ .Values.probes.readiness.path }}
+                                        port: {{ .Values.probes.readiness.port }}
+                                  initialDelaySeconds: {{ .Values.probes.readiness.initialDelaySeconds }}
+                                  periodSeconds: {{ .Values.probes.readiness.periodSeconds }}
                                         
