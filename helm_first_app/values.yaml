@@ -14,3 +14,15 @@ resource:
         limits:
                 cpu: 1
                 memory: 1Gi
+probes:
+        liveness:
+                path: /app/index
+                port: 8080
+                initialDelaySeconds: 90
+                periodSeconds: 5
+        readiness:
+                path: /app/index
+                port: 8080
+                initialDelaySeconds: 60
+                periodSeconds: 5
+                
