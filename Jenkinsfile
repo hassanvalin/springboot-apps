@@ -105,7 +105,10 @@ pipeline {
 	steps {
 	    script {
                 sh 'pwd'
+		    
 		sh '/usr/local/bin/helm install my-app helm_first_app --kubeconfig=$kubeconfig --kube-context=MyK8SCluster --set imageName=$imagename'
+		//imageName is given in  springboot-apps/helm_first_app/values.yaml file that we are overriding with imagename variable defined in 'Building image' stage because it dynamically uses the current build instead of hardcoded value from values.yaml file
+		    
                 sh '/usr/local/bin/helm list --kubeconfig=$kubeconfig --kube-context=MyK8SCluster'
             }
         }	
