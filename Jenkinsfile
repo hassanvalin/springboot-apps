@@ -69,6 +69,7 @@ pipeline {
       steps{
         script {
             dockerImage = docker.build(registry + ":$BUILD_NUMBER", "first_spring_boot/")
+	    env.imagename = registry + ":$BUILD_NUMBER"	
         }
       }
     }
@@ -104,7 +105,7 @@ pipeline {
 	steps {
 	    script {
                 sh 'pwd'
-		sh '/usr/local/bin/helm install my-app helm_first_app --kubeconfig=$kubeconfig --kube-context=MyK8SCluster'
+		sh '/usr/local/bin/helm install my-app helm_first_app --kubeconfig=$kubeconfig --kube-context=MyK8SCluster --set imageName=$imagename'
                 sh '/usr/local/bin/helm list --kubeconfig=$kubeconfig --kube-context=MyK8SCluster'
             }
         }	
