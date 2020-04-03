@@ -10,7 +10,7 @@ import util.Date;
 public class RestApiController {
 	@GetMapping("/index")
 	public String index() {
-		System.out.println("Welcome: " + new Date())
+		System.out.println("Welcome: " + new Date());
 		return "Welcome to the home page!";
 	}
 }
