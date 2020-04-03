@@ -24,4 +24,9 @@ spec:          # What state you desire for the object
                                   limits:
                                           cpu: {{ .Values.resource.limits.cpu }}
                                           memory: {{ .Values.resource.limits.memory }}
-
+                          livenessProbe:
+                                  httpGet:
+                                          path: /app/index
+                                          port: 80
+                                  initialDelaySeconds: 90
+                                  periodSeconds: 5        
