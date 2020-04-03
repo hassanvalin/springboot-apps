@@ -9,8 +9,8 @@ service:
         port: 80
         targetport: 8080
 resource:        
-        cpu: 0.3
+        cpu: 0.5
         memory: 256m
         limits:
-                cpu: 0.3
+                cpu: 1
                 memory: 512m
