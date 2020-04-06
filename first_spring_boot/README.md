@@ -29,3 +29,32 @@ Exposes the Service externally using a cloud provider’s load balancer. NodePor
 
 # ExternalName: 
 Maps the Service to the contents of the externalName field (e.g. foo.bar.example.com), by returning a CNAME record with its value. No proxying of any kind is set up.
+
+
+---
+# K8S Volumes
+
+* Docker also has volumes concept but K8S Volumes is much more matured than Docker volumes
+* In Docker when container restarts the data will be erased from Volume but in K8S the Volumes are associated with Lifecycle of Pod it won’t loose the data even you restart the Pod
+
+
+# Types : 
+
+* Ephemeral - Same lifetime as pods ( gets created when pod created and dies when pod dies )
+* Durable - Beyond pod lifetime ( it gets created when pod cerated but data persists even pod dies )
+
+We’ve many Volumes types in K8S but we are going to concentrate on below :
+
+# emptyDir :
+
+* K8S creates empty Directory when a Pod is assigned to a Node
+* Stays as long as pod is running
+* Once Pod is removed from a node, emptyDir is deleted forever
+* Use case - Temporary Space and share data between multiple containers
+
+# hostpath :
+
+* Mounts the file or a directory from the host nodes filesystem into your pod
+* Remains even after the pod is terminated
+* Similar to docker volume because in docker volume concept also you are exposing the filesystem path from node to your container
+* Use cautiously when required because if you are using in production like systems as it’s creating path at each node level the data might in sync and causes problems as each pod deals with it’s individual hostpath
