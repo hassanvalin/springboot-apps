@@ -32,7 +32,7 @@ Maps the Service to the contents of the externalName field (e.g. foo.bar.example
 
 
 ---
-                          # K8S Volumes
+#                                         K8S Volumes
 
 * Docker also has volumes concept but K8S Volumes is much more matured than Docker volumes
 * In Docker when container restarts the data will be erased from Volume but in K8S the Volumes are associated with Lifecycle of Pod it won’t loose the data even you restart the Pod
