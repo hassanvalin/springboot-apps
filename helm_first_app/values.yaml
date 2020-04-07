@@ -17,8 +17,8 @@ probes:
     port: 8080
 pv: 
   labels: 
-    app: persistent
-    release: v1
+     app: persistent
+     release: v1
   path: /opt/mysql-data
   storage: 1Gi
 resource: 
