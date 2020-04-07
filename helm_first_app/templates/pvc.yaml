@@ -1,17 +1,12 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-	name: {{ .Values.deployName }}-pvc
-	labels:
-		{{- toYaml .Values.pv.labels}}
+        name: {{ .Values.deployName }}-pvc
+        labels:
+                {{- toYaml .Values.pv.labels}}
 spec:
-	accessModes:
-		- ReadWriteMany
-	selectors:	
-		matchLabels:
-			{{- toYaml .Values.pv.labels}}
-	resources:
-		requests:
-			storage: {{ .Values.pv.storage }}
-		
- 
+        accessModes:
+                - ReadWriteMany
+        selectors:
+                matchLabels:
+                        {{- toYaml .Values.pv.labels}}  
