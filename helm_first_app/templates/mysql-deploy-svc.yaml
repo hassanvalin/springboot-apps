@@ -1,45 +1,45 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-    name: mysql-deployment
+    name: {{ .Values.mysql.appName }}
     namespace: {{ .Values.namespace }}
     labels:
-       app: mysql
+       app: {{ .Values.mysql.labels.app }}
 spec:
     selector:
        matchLabels:
-            app: mysql
+            app: {{ .Values.mysql.labels.app }}
     template:
        metadata:
             labels:
-               app: mysql
+               app: {{ .Values.mysql.labels.app }}
        spec:
             containers:
-               - name: mysqlapp
-                 image: mysql:5.7
+               - name: {{ .Values.mysql.labels.containername }}
+                 image: {{ .Values.mysql.labels.containerimg }}
                  env:
-                    - name: MYSQL_ROOT_PASSWORD
-                      value: secretpwd
+                    - name: {{ .Values.mysql.labels.envname }}
+                      value: {{ .Values.mysql.labels.envval }}
                  volumeMounts:
-                    - name: mysql-volume
-                      mountPath: /var/lib/mysql
+                    - name: {{ .Values.mysql.volume.name }}
+                      mountPath: {{ .Values.mysql.volume.mountpath }}
             volumes:
-              - name: mysql-volume
+              - name: {{ .Values.mysql.volume.name }}
                 persistentVolumeClaim:
-                      claimName: my-first-app-pvc
+                      claimName: {{ .Values.mysql.volume.volclaimname }}
 
 ---
 
 apiVersion: v1
 kind: Service
 metadata:
-   name: mysql-deployment
+   name: {{ .Values.mysql.appName }}
    namespace: {{ .Values.namespace }}
    labels:
-      app: mysql
+      app: {{ .Values.mysql.labels.app }}
 spec:
    ports:
-      - name: http
-        port: 3306
+      - name: {{ .Values.mysql.type }}
+        port: {{ .Values.mysql.sqlport }}
    selector:
-        app: mysql
+        app: {{ .Values.mysql.labels.app }}
