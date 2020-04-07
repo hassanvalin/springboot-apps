@@ -63,22 +63,23 @@ watch kubectl get pods -n <your_Name_Space>
 kubectl edit deployment <Your_deployment_Name> -n <your_Name_Space>
 
 
-############ Using Volumes ############################
 
-# templates/pv.yaml
+#  ########### Using Volumes ############################
+
+- templates/pv.yaml
 
 Persistent volume has been created
 
-# templates/pvc.yaml
+- templates/pvc.yaml
 
 Persistent volume claim has been created
 
-# templates/mysql-deploy-svc.yaml
+- templates/mysql-deploy-svc.yaml
 
 Mysql DB has been created and exposed the port with service
 
 
-# If you want to apply through kubectl you can generate yaml files using 'helm template .' that gives you all yaml files, naming it as test2.yaml
+-  If you want to apply through kubectl you can generate yaml files using 'helm template .' that gives you all yaml files, naming it as test2.yaml
 
 ---
 # Source: first_app/templates/pv.yaml
