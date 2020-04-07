@@ -3,7 +3,7 @@ appName: my-spring-app
 deployName: my-first-app
 imageName: "hassandocker1/my_java_image:76"
 labelName: my-app
-namespace: helm-ns
+namespace: helm-ns1
 probes: 
   liveness: 
     initialDelaySeconds: 90
