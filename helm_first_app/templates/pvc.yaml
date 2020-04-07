@@ -3,10 +3,13 @@ kind: PersistentVolumeClaim
 metadata:
         name: {{ .Values.deployName }}-pvc
         labels:
-                {{- toYaml .Values.pv.labels}}
+{{- toYaml .Values.pv.labels | nindent 12}}
 spec:
         accessModes:
                 - ReadWriteMany
-        selectors:
+        resources:
+                requests:
+                     storage: {{ .Values.pv.storage}}
+        selector:
                 matchLabels:
-                        {{- toYaml .Values.pv.labels}}  
+{{- toYaml .Values.pv.labels | nindent 20}}
