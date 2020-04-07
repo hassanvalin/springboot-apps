@@ -168,7 +168,7 @@ spec:
 
 
 
-. Created a namespace helm-ns1 and applied the file using 'kubectl apply -f test2.yaml' that creates all below kubernetes objects
+- Created a namespace helm-ns1 and applied the file using 'kubectl apply -f test2.yaml' that creates all below kubernetes objects
 
 persistentvolume/my-first-app-pv created
 persistentvolumeclaim/my-first-app-pvc created
@@ -176,16 +176,16 @@ service/mysql-deployment created
 deployment.apps/mysql-deployment created
 
 
-. You can see pv and pvc created using command 'kubectl get pv'
+- You can see pv and pvc created using command 'kubectl get pv'
 
-. Check deployments, pods, svc using below kubectl commands
+- Check deployments, pods, svc using below kubectl commands
 
 kubectl get deployments -n helm-ns1
 kubectl get pods -n helm-ns1
 kubectl get svc -n helm-ns1
 
 
-. If you want to verify by connecting to the mysql DB that created use below sample command that connects to your DB
+- If you want to verify by connecting to the mysql DB that created use below sample command that connects to your DB
 
 kubectl run -it --rm --image=mysql:5.7 --restart=Never -n helm-ns1 mysql-client -- mysql -h <your_svc_name> -psecretpwd
 
@@ -205,5 +205,5 @@ mysql> select * from mytable;
 Empty set (0.01 sec)
 
 
-. Even if you delete the pod and recreate a new one that data will be available in DB because of volumes
+- Even if you delete the pod and recreate a new one that data will be available in DB because of volumes
 
