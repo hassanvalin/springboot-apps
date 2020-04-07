@@ -59,7 +59,3 @@ We’ve many Volumes types in K8S but we are going to concentrate on below :
 * Similar to docker volume because in docker volume concept also you are exposing the filesystem path from node to your container
 * Use cautiously when required because if you are using in production like systems as it’s creating path at each node level the data might in sync and causes problems as each pod deals with it’s individual hostpath
 
-
-# K8S Architecture
-
-
