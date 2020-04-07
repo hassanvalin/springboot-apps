@@ -62,3 +62,147 @@ watch kubectl get pods -n <your_Name_Space>
 # In any case if you want to edit the running deployment use below command that will recreate the Pod as well
 kubectl edit deployment <Your_deployment_Name> -n <your_Name_Space>
 
+
+############ Using Volumes ############################
+
+# templates/pv.yaml
+
+Persistent volume has been created
+
+# templates/pvc.yaml
+
+Persistent volume claim has been created
+
+# templates/mysql-deploy-svc.yaml
+
+Mysql DB has been created and exposed the port with service
+
+
+# If you want to apply through kubectl you can generate yaml files using 'helm template .' that gives you all yaml files, naming it as test2.yaml
+
+---
+# Source: first_app/templates/pv.yaml
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+        name: my-first-app-pv
+        namespace: helm-ns1
+        labels:
+            app: persistent
+            release: v1
+spec:
+        accessModes:
+                - ReadWriteMany
+        hostPath:
+                path: /opt/mysql-data
+                type: DirectoryOrCreate
+        capacity:
+                storage: 1Gi
+---
+# Source: first_app/templates/pvc.yaml
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+        name: my-first-app-pvc
+        namespace: helm-ns1
+        labels:
+            app: persistent
+            release: v1
+spec:
+        accessModes:
+                - ReadWriteMany
+        resources:
+                requests:
+                     storage: 1Gi
+        selector:
+                matchLabels:
+                    app: persistent
+                    release: v1
+---
+# Source: first_app/templates/mysql-deploy-svc.yaml
+apiVersion: v1
+kind: Service
+metadata:
+   name: mysql-deployment
+   namespace: helm-ns1
+   labels:
+      app: mysql
+spec:
+   ports:
+      - name: http
+        port: 3306
+   selector:
+        app: mysql
+---
+# Source: first_app/templates/mysql-deploy-svc.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: mysql-deployment
+    namespace: helm-ns1
+    labels:
+       app: mysql
+spec:
+    selector:
+       matchLabels:
+            app: mysql
+    template:
+       metadata:
+            labels:
+               app: mysql
+       spec:
+            containers:
+               - name: mysqlapp
+                 image: mysql:5.7
+                 env:
+                    - name: MYSQL_ROOT_PASSWORD
+                      value: secretpwd
+                 volumeMounts:
+                    - name: mysql-volume
+                      mountPath: /var/lib/mysql
+            volumes:
+              - name: mysql-volume
+                persistentVolumeClaim:
+                      claimName: my-first-app-pvc
+
+
+
+. Created a namespace helm-ns1 and applied the file using 'kubectl apply -f test2.yaml' that creates all below kubernetes objects
+
+persistentvolume/my-first-app-pv created
+persistentvolumeclaim/my-first-app-pvc created
+service/mysql-deployment created
+deployment.apps/mysql-deployment created
+
+
+. You can see pv and pvc created using command 'kubectl get pv'
+
+. Check deployments, pods, svc using below kubectl commands
+
+kubectl get deployments -n helm-ns1
+kubectl get pods -n helm-ns1
+kubectl get svc -n helm-ns1
+
+
+. If you want to verify by connecting to the mysql DB that created use below sample command that connects to your DB
+
+kubectl run -it --rm --image=mysql:5.7 --restart=Never -n helm-ns1 mysql-client -- mysql -h <your_svc_name> -psecretpwd
+
+
+If you don't see a command prompt, try pressing enter.
+
+mysql> create database mydb;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> use mydb;
+Database changed
+
+mysql> create table mytable(name varchar(20), age varchar(15));
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> select * from mytable;
+Empty set (0.01 sec)
+
+
+. Even if you delete the pod and recreate a new one that data will be available in DB because of volumes
+
