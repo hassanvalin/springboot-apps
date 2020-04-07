@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: mysql-deployment
+    namespace: {{ .Values.namespace }}
+    labels:
+       app: mysql
+spec:
+    selector:
+       matchLabels:
+            app: mysql
+    template:
+       metadata:
+            labels:
+               app: mysql
+       spec:
+            containers:
+               - name: mysqlapp
+                 image: mysql:5.7
+                 env:
+                    - name: MYSQL_ROOT_PASSWORD
+                      value: secretpwd
+                 volumeMounts:
+                    - name: mysql-volume
+                      mountPath: /var/lib/mysql
+            volumes:
+              - name: mysql-volume
+                persistentVolumeClaim:
+                      claimName: my-first-app-pvc
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+   name: mysql-deployment
+   namespace: {{ .Values.namespace }}
+   labels:
+      app: mysql
+spec:
+   ports:
+      - name: http
+        port: 3306
+   selector:
+        app: mysql

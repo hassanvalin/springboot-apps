@@ -21,6 +21,9 @@ pv:
      release: v1
   path: /opt/mysql-data
   storage: 1Gi
+
+mysql:
+  
 resource: 
   cpu: 0.3
   limits: 
