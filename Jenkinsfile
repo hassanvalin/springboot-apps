@@ -3,7 +3,7 @@ pipeline {
   environment {
     registry = "hassandocker1/my_java_image"
     registryCredential = 'dockerhub'
-    kubeconfig = credentials('azure_kubeconfig')
+    #kubeconfig = credentials('azure_kubeconfig')
     dockerImage = ''
  
   }
@@ -100,7 +100,7 @@ pipeline {
             }
         }
     } */
-
+    /**
     stage('Deploy Using Helm') {
 	steps {
 	    script {
@@ -112,7 +112,7 @@ pipeline {
                 sh '/usr/local/bin/helm list --kubeconfig=$kubeconfig --kube-context=MyK8SCluster'
             }
         }	
-    }
+    } */
   }
 }  
   
