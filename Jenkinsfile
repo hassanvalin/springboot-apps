@@ -7,6 +7,11 @@ pipeline {
     dockerImage = ''
  
   }
+  
+  tools {
+	  maven 'Maven_3.6'
+  }	  
+		
  
   agent any
   
