@@ -24,4 +24,23 @@ pipeline {
 }
 
 
+- 'parameters' directive provides a list of parametes that a user should provide when triggering the pipeline. The values for these user-specified parameters are made available to Pipeline steps via the 'params' object.
+
+parameters {
+        string(name: 'PERSON', defaultValue: 'DAN', description: 'Give name of the person')
+        text(name: 'ANYTEXT', defaultValue: '', description: 'Enter any text')
+        booleanParam(name: 'TOGGLE', defaultValue: true, description: 'Enter True or False')
+        choice(name: 'MYCHOICE', choices: ['Hello','Hi','How r u'], description: 'Select your choice')
+        password(name: 'MYPWD', defaultValue: 'SECRET', description: 'Enter the password')
+}
+    
+stage('Taking parameters') {
+            steps {
+                print("Hello, ${params.PERSON}")
+                print("${params.ANYTEXT}")
+                print("${TOGGLE}")
+                print("My choice is: ${MYCHOICE}")
+                print("My password is: ${MYPWD}")
+            }
+ }    
 
