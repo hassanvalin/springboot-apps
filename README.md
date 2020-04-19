@@ -56,3 +56,34 @@ Supported tools : maven, gradle, jdk
 tools {
         maven 'MAVEN_3.6.3'       // Tools name 'MAVEN_3.6.3' must be configured in Jenkins Global tools configuration
     }
+
+
+- input
+
+The 'input' directive on a stage allows you to prompt for input, using the input step.
+
+Configurations Options:
+
+message
+ok
+submitter
+parameters -- Make sure while calling in steps we are not using params object , we can directly use varaiable name with ${}
+
+pipeline {
+    agent any
+    stages {
+        stage('Example') {
+            input {
+                message "Should we continue?"
+                ok "Yes, we should."
+                submitter "alice,bob"
+                parameters {
+                    string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?')
+                }
+            }
+            steps {
+                echo "Hello, ${PERSON}, nice to meet you."
+            }
+        }
+    }
+}
