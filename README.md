@@ -32,15 +32,5 @@ parameters {
         booleanParam(name: 'TOGGLE', defaultValue: true, description: 'Enter True or False')
         choice(name: 'MYCHOICE', choices: ['Hello','Hi','How r u'], description: 'Select your choice')
         password(name: 'MYPWD', defaultValue: 'SECRET', description: 'Enter the password')
-}
-    
-stage('Taking parameters') {
-            steps {
-                print("Hello, ${params.PERSON}")
-                print("${params.ANYTEXT}")
-                print("${TOGGLE}")
-                print("My choice is: ${MYCHOICE}")
-                print("My password is: ${MYPWD}")
-            }
- }    
+    }
 
