@@ -23,30 +23,44 @@ pipeline {
     }
 }
 
+---
+- parameters
 
-- 'parameters' directive provides a list of parametes that a user should provide when triggering the pipeline. The values for these user-specified parameters are made available to Pipeline steps via the 'params' object.
+'parameters' directive provides a list of parametes that a user should provide when triggering the pipeline. The values for these user-specified parameters are made available to Pipeline steps via the 'params' object.
 
-parameters {
-        string(name: 'PERSON', defaultValue: 'DAN', description: 'Give name of the person')
-        text(name: 'ANYTEXT', defaultValue: '', description: 'Enter any text')
-        booleanParam(name: 'TOGGLE', defaultValue: true, description: 'Enter True or False')
-        choice(name: 'MYCHOICE', choices: ['Hello','Hi','How r u'], description: 'Select your choice')
-        password(name: 'MYPWD', defaultValue: 'SECRET', description: 'Enter the password')
+pipeline {
+    agent any
+    
+    parameters {
+        string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?')
+
+        text(name: 'BIOGRAPHY', defaultValue: '', description: 'Enter some information about the person')
+
+        booleanParam(name: 'TOGGLE', defaultValue: true, description: 'Toggle this value')
+
+        choice(name: 'CHOICE', choices: ['One', 'Two', 'Three'], description: 'Pick something')
+
+        password(name: 'PASSWORD', defaultValue: 'SECRET', description: 'Enter a password')
     }
-
-
-
-stage('Taking parameters') {
+    stages {
+        stage('Example') {
             steps {
-                print("Hello, ${params.PERSON}")
-                print("${params.ANYTEXT}")
-                print("${TOGGLE}")
-                print("My choice is: ${MYCHOICE}")
-                print("My password is: ${MYPWD}")
+                echo "Hello ${params.PERSON}"
+
+                echo "Biography: ${params.BIOGRAPHY}"
+
+                echo "Toggle: ${params.TOGGLE}"
+
+                echo "Choice: ${params.CHOICE}"
+
+                echo "Password: ${params.PASSWORD}"
             }
         }
+    }
+}
 
 
+---
 - tools
 
 'tools' section is to auto-install and put on the PATH. 
@@ -69,6 +83,7 @@ pipeline {
 }
 
 
+---
 - input
 
 The 'input' directive on a stage allows you to prompt for input, using the input step.
