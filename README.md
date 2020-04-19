@@ -53,9 +53,20 @@ stage('Taking parameters') {
 
 Supported tools : maven, gradle, jdk
 
-tools {
-        maven 'MAVEN_3.6.3'       // Tools name 'MAVEN_3.6.3' must be configured in Jenkins Global tools configuration
+pipeline {
+    agent any
+    
+    tools {
+        maven 'apache-maven-3.0.1'  // The name 'apache-maven-3.0.1' should be configured in Jenkins global tools configuration before using here
     }
+    stages {
+        stage('Example') {
+            steps {
+                sh 'mvn --version'
+            }
+        }
+    }
+}
 
 
 - input
