@@ -45,3 +45,14 @@ stage('Taking parameters') {
                 print("My password is: ${MYPWD}")
             }
         }
+
+
+- tools
+
+'tools' section is to auto-install and put on the PATH. 
+
+Supported tools : maven, gradle, jdk
+
+tools {
+        maven 'MAVEN_3.6.3'       // Tools name 'MAVEN_3.6.3' must be configured in Jenkins Global tools configuration
+    }
