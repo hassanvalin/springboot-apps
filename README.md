@@ -9,6 +9,7 @@ Spring Boot Apps
 sudo visudo -> update the sudoers with entry `jenkins	ALL=(ALL) 	NOPASSWD: ALL`
 
 
+---
 - Simple code to checkout with Jenkins file
 
 pipeline {
