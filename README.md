@@ -4,6 +4,11 @@ Spring Boot Apps
 
 
 
+- By default Jenkins installation creates an user called 'jenkins' and all jobs would be executed with that user. So, you have to enable sudo access to jenkins user by updating 'visudo'. 
+
+sudo visudo -> update the sudoers with entry `jenkins	ALL=(ALL) 	NOPASSWD: ALL`
+
+
 - Simple code to checkout with Jenkins file
 
 pipeline {
@@ -19,7 +24,4 @@ pipeline {
 }
 
 
-- By default Jenkins installation creates an user called 'jenkins' and all jobs would be executed with that user. So, you have to enable sudo access to jenkins user by updating 'visudo'. 
-
-sudo visudo -> update the sudoers with entry `jenkins	ALL=(ALL) 	NOPASSWD: ALL`
 
