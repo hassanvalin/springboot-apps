@@ -71,6 +71,7 @@ parameters -- Make sure while calling in steps we are not using params object , 
 
 pipeline {
     agent any
+    
     stages {
         stage('Example') {
             input {
