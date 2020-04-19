@@ -64,9 +64,9 @@ The 'input' directive on a stage allows you to prompt for input, using the input
 
 Configurations Options:
 
-message \n
-ok
-submitter
+message ,
+ok , 
+submitter , 
 parameters -- Make sure while calling in steps we are not using params object , we can directly use varaiable name with ${}
 
 pipeline {
