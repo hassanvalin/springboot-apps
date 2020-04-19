@@ -34,3 +34,13 @@ parameters {
         password(name: 'MYPWD', defaultValue: 'SECRET', description: 'Enter the password')
     }
 
+
+stage('Taking parameters') {
+            steps {
+                print("Hello, ${params.PERSON}")
+                print("${params.ANYTEXT}")
+                print("${TOGGLE}")
+                print("My choice is: ${MYCHOICE}")
+                print("My password is: ${MYPWD}")
+            }
+        }
