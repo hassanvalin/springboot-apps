@@ -35,6 +35,7 @@ parameters {
     }
 
 
+
 stage('Taking parameters') {
             steps {
                 print("Hello, ${params.PERSON}")
