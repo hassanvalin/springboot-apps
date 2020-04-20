@@ -148,3 +148,18 @@ pipeline {
         }
     }
 }
+
+
+---
+- environment
+
+The 'environment' directive specifies a sequence of key-value pairs which will be defined as environment variables for all steps, or stage-specific steps, depending on where the environment directive is located within the Pipeline.
+
+This directive supports a special helper method 'credentials()' which can be used to access pre-defined Credentials by their identifier in the Jenkins environment.
+
+Supported Credentials Type :
+
+1. Secret Text
+2. Secret file
+3. Username and Password -- the environment variable specified will be set to username:password and two additional environment variables will be automatically defined: MYVARNAME_USR and MYVARNAME_PSW respectively.
+4. SSH with Private Key -- the environment variable specified will be set to the location of the SSH key file that is temporarily created and two additional environment variables may be automatically defined: MYVARNAME_USR and MYVARNAME_PSW (holding the passphrase).
