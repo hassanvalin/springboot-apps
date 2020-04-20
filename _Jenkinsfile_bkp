@@ -7,10 +7,11 @@ pipeline {
     }
     
     
+   /** It gets effected if you use 'agent any' as we are using maven image that takes the effect
     tools {
         maven 'MAVEN_3.6.3' // The name 'MAVEN_3.6.3' should be configured in Jenkins global tools configuration before using here
     }
-    
+    */
     
     // you can force your parallel stages to all be aborted when any one of them fails, by adding failFast true to the stage containing the parallel.
     // Another option for adding failfast is adding an option to the pipeline definition: parallelsAlwaysFailFast()
