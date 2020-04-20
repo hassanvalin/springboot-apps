@@ -123,3 +123,27 @@ pipeline {
 The 'when' directive allows the Pipeline to determine whether the stage should be executed depending on the given condition. The when directive must contain at least one condition. If the when directive contains more than one condition, all the child conditions must return true for the stage to execute. This is the same as if the child conditions were nested in an 'allOf' condition (see the examples below). If an 'anyOf' condition is used, note that the condition skips remaining tests as soon as the first "true" condition is found.
 
 We have many buit in conditions to check with when directive ... 
+
+
+---
+- script
+
+The 'script' step takes a block of Scripted Pipeline and executes that in the Declarative Pipeline.
+
+pipeline {
+    agent any
+    stages {
+        stage('Example') {
+            steps {
+                echo 'Hello World'
+
+                script {
+                    def browsers = ['chrome', 'firefox']
+                    for (int i = 0; i < browsers.size(); ++i) {
+                        echo "Testing the ${browsers[i]} browser"
+                    }
+                }
+            }
+        }
+    }
+}
