@@ -73,14 +73,17 @@ pipeline {
     stage('Building image') {
       steps{
         script {
-            dockerImage = docker.build(registry + ":$BUILD_NUMBER", "first_spring_boot/")
-	    //env.imagename = registry + ":$BUILD_NUMBER"	
+	    // Docker Pipeline plugin provides a build() method for creating a new image, from a Dockerfile in the repository, during a Pipeline run.	
+            dockerImage = docker.build(registry + ":$BUILD_NUMBER", "first_spring_boot/")	
         }
       }
     }
+	  
     stage('Docker Push') {
       steps{
         script {
+	  // The return value can be used to publish the Docker image to Docker Hub, via the push() method
+	  // For a Docker Registry which requires authentication, add a "Username/Password" Credentials item from the Jenkins home page and use the Credentials ID as a second argument to withRegistry()	
           docker.withRegistry( '', registryCredential ) {
             dockerImage.push()
           }
