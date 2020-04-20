@@ -84,7 +84,7 @@ pipeline {
         script {
 	  // The return value can be used to publish the Docker image to Docker Hub, via the push() method
 	  // For a Docker Registry which requires authentication, add a "Username/Password" Credentials item from the Jenkins home page and use the Credentials ID as a second argument to withRegistry()	
-          docker.withRegistry( '', registryCredential ) {
+          docker.withRegistry(registryCredential ) {
             dockerImage.push()
           }
         }
