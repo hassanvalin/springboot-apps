@@ -132,6 +132,7 @@ The 'script' step takes a block of Scripted Pipeline and executes that in the De
 
 pipeline {
     agent any
+    
     stages {
         stage('Example') {
             steps {
