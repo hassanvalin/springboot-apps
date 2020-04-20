@@ -74,7 +74,7 @@ pipeline {
       steps{
         script {
             dockerImage = docker.build(registry + ":$BUILD_NUMBER", "first_spring_boot/")
-	    env.imagename = registry + ":$BUILD_NUMBER"	
+	    //env.imagename = registry + ":$BUILD_NUMBER"	
         }
       }
     }
