@@ -9,7 +9,7 @@ pipeline {
   }
   
   tools {
-	  maven 'Maven_3.6' //We've configured 'Maven_3.6' in 'Jenkins - Global Too Configuration' so that the jobs uses this
+	  maven 'MAVEN_3.6.3' //We've configured 'Maven_3.6' in 'Jenkins - Global Too Configuration' so that the jobs uses this
   }	  
 		
  
