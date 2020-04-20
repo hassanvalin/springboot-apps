@@ -202,9 +202,12 @@ pipeline {
 
 -- agent can be also mentioned with node , the main advantage with node block is to have customworkspace
 
-agent {
-    node {
-        label 'my-defined-label'
-        customWorkspace '/some/other/path'
-    }
+pipeline {
+
+   agent {
+        node {
+            label 'my-defined-label'
+            customWorkspace '/some/other/path'
+        }
+   }
 }
