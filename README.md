@@ -169,3 +169,31 @@ Supported Credentials Type :
 - options
 
 The 'options' directive allows configuring Pipeline-specific options from within the Pipeline itself. Pipeline provides a number of these options, such as 'buildDiscarder', but they may also be provided by plugins, such as 'timestamps'.
+
+
+
+--- 
+- Using multiple docker agents in different stages
+
+pipeline {
+    agent none
+    
+    stages {
+        stage('Back-end') {
+            agent {
+                docker { image 'maven:3-alpine' }
+            }
+            steps {
+                sh 'mvn --version'
+            }
+        }
+        stage('Front-end') {
+            agent {
+                docker { image 'node:7-alpine' }
+            }
+            steps {
+                sh 'node --version'
+            }
+        }
+    }
+}
