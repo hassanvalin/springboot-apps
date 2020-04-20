@@ -163,3 +163,9 @@ Supported Credentials Type :
 2. Secret file
 3. Username and Password -- the environment variable specified will be set to username:password and two additional environment variables will be automatically defined: MYVARNAME_USR and MYVARNAME_PSW respectively.
 4. SSH with Private Key -- the environment variable specified will be set to the location of the SSH key file that is temporarily created and two additional environment variables may be automatically defined: MYVARNAME_USR and MYVARNAME_PSW (holding the passphrase).
+
+
+---
+- options
+
+The 'options' directive allows configuring Pipeline-specific options from within the Pipeline itself. Pipeline provides a number of these options, such as 'buildDiscarder', but they may also be provided by plugins, such as 'timestamps'.
