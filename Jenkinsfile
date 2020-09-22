@@ -31,6 +31,7 @@ pipeline {
           sh '''
             cd first_spring_boot
             pwd
+	    mvn --version
             mvn clean install -DskipTests
             '''
         }  
