@@ -10,7 +10,7 @@ pipeline {
   
   tools {
 	  maven 'MAVEN_3.6.3' //We've configured 'Maven_3.6' in 'Jenkins - Global Too Configuration' so that the jobs uses this
-	  jdk 'openjdk-11'
+	  jdk 'java_11'
   }	  
 		
  
